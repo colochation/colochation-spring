@@ -22,7 +22,7 @@ public class InMemoryGuestsRepository implements GuestsRepository {
 
     private final Map<UUID, Guest> guests_data = new HashMap<>(
             Map.of(
-                    UUID.randomUUID(), new Guest("Léa", today.withHour(18)),
+                    UUID.randomUUID(), new Guest("Remy", today.withHour(18)),
                     UUID.randomUUID(), new Guest("Charles", tomorrow.withHour(18)),
                     UUID.randomUUID(), new Guest("Sananes", tomorrow.withHour(23)),
                     UUID.randomUUID(), new Guest("?", inOneWeek.withHour(18)),
