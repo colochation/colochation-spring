@@ -24,4 +24,11 @@ public class InMemoryChoresRepository implements ChoresRepository {
     public List<Chore> findAll() {
         return this.chores.values().stream().toList();
     }
+
+    @Override
+    public Chore add(Chore chore) {
+        final var id = UUID.randomUUID();
+        this.chores.put(id, chore);
+        return this.chores.get(id);
+    }
 }

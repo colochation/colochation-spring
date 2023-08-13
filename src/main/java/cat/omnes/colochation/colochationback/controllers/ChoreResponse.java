@@ -4,7 +4,7 @@ import cat.omnes.colochation.colochationback.domain.Chore;
 
 public record ChoreResponse(
         String title,
-        Boolean isToDo,
+        Boolean toDo,
         String assigned
 ) {
     public static ChoreResponse fromDomain(Chore chore) {
