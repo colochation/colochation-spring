@@ -2,11 +2,13 @@ package cat.omnes.colochation.colochationback.controllers;
 
 import cat.omnes.colochation.colochationback.domain.Chore;
 
-public record ChoreRequest(
+import java.util.UUID;
+
+public record NewChoreRequest(
         String title,
         String assigned
 ) {
     public Chore toDomain() {
-        return new Chore(this.title, "to_do", this.assigned);
+        return new Chore(UUID.randomUUID(), this.title, "to_do", this.assigned);
     }
 }
