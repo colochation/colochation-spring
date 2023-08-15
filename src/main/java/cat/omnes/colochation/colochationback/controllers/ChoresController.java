@@ -9,6 +9,7 @@ import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
@@ -24,8 +25,15 @@ public class ChoresController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ChoreResponse>> getChores() {
-        return ResponseEntity.ok(choresRepository.findAll().stream().map(ChoreResponse::fromDomain).toList());
+    public List<ChoreResponse> getChores(@RequestParam Optional<Boolean> todo) {
+        final var chores = choresRepository
+                .findAll()
+                .stream()
+                .map(ChoreResponse::fromDomain);
+
+        return todo
+                .map(isToDo -> chores.filter(c -> c.toDo().equals(isToDo)).toList())
+                .orElseGet(chores::toList);
     }
 
     @PostMapping
