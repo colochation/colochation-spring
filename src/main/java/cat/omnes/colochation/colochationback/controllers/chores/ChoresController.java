@@ -1,11 +1,10 @@
-package cat.omnes.colochation.colochationback.controllers;
+package cat.omnes.colochation.colochationback.controllers.chores;
 
 import cat.omnes.colochation.colochationback.domain.Chore;
 import cat.omnes.colochation.colochationback.domain.ChoresRepository;
+import cat.omnes.colochation.colochationback.infrastructure.utils.UuidUtils;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -44,17 +43,21 @@ public class ChoresController {
 
     @PatchMapping("/{id}")
     public ChoreResponse updateChoreStatus(@PathVariable String id) {
-        UUID uuid;
-        try {
-            uuid  = UUID.fromString(id);
-        } catch (IllegalArgumentException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid UUID string: " + id);
-        }
-        return choresRepository
-                .find(uuid)
+        return UuidUtils
+                .fromString(id)
+                .flatMap(choresRepository::find)
                 .map(Chore::done)
                 .flatMap(choresRepository::update)
                 .map(ChoreResponse::fromDomain)
                 .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Unable to find Chore with id " + id));
+    }
+
+    @PutMapping()
+    public ChoreResponse updateChore(@RequestBody UpdateChoreDto chore) {
+        return chore
+                .toDomain()
+                .flatMap(choresRepository::update)
+                .map(ChoreResponse::fromDomain)
+                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Unable to find Chore with id " + chore.id()));
     }
 }

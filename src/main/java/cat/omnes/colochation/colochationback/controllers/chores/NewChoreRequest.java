@@ -1,4 +1,4 @@
-package cat.omnes.colochation.colochationback.controllers;
+package cat.omnes.colochation.colochationback.controllers.chores;
 
 import cat.omnes.colochation.colochationback.domain.Chore;
 
