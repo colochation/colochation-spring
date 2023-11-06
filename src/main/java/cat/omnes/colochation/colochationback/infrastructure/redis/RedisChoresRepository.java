@@ -3,11 +3,20 @@ package cat.omnes.colochation.colochationback.infrastructure.redis;
 import cat.omnes.colochation.colochationback.domain.Chore;
 import cat.omnes.colochation.colochationback.domain.ChoresRepository;
 import org.springframework.stereotype.Repository;
+import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.JedisPooled;
 
 import java.util.*;
 
-@Repository
 public class RedisChoresRepository implements ChoresRepository {
+
+    private final JedisPooled redis;
+
+    public RedisChoresRepository(JedisPooled jedis) {
+        this.redis = jedis;
+    }
+
+
     @Override
     public List<Chore> findAll() {
         throw new UnsupportedOperationException("Not implemented yet");

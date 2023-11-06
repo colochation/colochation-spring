@@ -1,4 +1,4 @@
-package cat.omnes.colochation.colochationback.infrastructure;
+package cat.omnes.colochation.colochationback.infrastructure.inmemory;
 
 import cat.omnes.colochation.colochationback.domain.ChoresRepository;
 import cat.omnes.colochation.colochationback.domain.Guest;
@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-@Repository
 public class InMemoryGuestsRepository implements GuestsRepository {
     private final LocalDateTime today = LocalDateTime
             .now()

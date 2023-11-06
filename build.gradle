@@ -27,6 +27,7 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'redis.clients:jedis:5.0.0'
 }
 
 tasks.named('test') {

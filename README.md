@@ -44,5 +44,5 @@ de merge.
 
 ## Auteurs 🪶
 
-- Théo - [@NightTheo](https://github.com/NightTheo)
+- Théo - [@ohmushi](https://github.com/ohmushi)
 - [@nathan-dev-dot](https://github.com/nathan-dev-dot)

@@ -1,4 +1,4 @@
-package cat.omnes.colochation.colochationback.infrastructure;
+package cat.omnes.colochation.colochationback.infrastructure.inmemory;
 
 import cat.omnes.colochation.colochationback.domain.Chore;
 import cat.omnes.colochation.colochationback.domain.ChoresRepository;
@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
-@Repository
 public class InMemoryChoresRepository implements ChoresRepository {
 
     private final Set<Chore> chores = new HashSet<>(
