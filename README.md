@@ -46,3 +46,15 @@ de merge.
 
 - Théo - [@ohmushi](https://github.com/ohmushi)
 - [@nathan-dev-dot](https://github.com/nathan-dev-dot)
+
+```shell
+# REDIS
+docker build -t nighttheo/infra-as-code:redis -f redis/redis.Dockerfile ./redis
+docker run --name iac-redis -p 6379:6379 -v ./redis/data:/data --network="iac" --rm -d nighttheo/infra-as-code:redis
+```
+
+```shell
+# SPRING
+docker build -t nighttheo/infra-as-code:colochation -f Dockerfile . 
+docker run --name iac-colochation -p 8080:8080 --network="iac" --rm -d nighttheo/infra-as-code:colochation
+```
