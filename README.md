@@ -55,6 +55,18 @@ docker run --name iac-redis -p 6379:6379 -v ./redis/data:/data --network="iac" -
 
 ```shell
 # SPRING
-docker build -t nighttheo/infra-as-code:colochation -f Dockerfile . 
+docker build -t docker --push rg.fr-par.scw.cloud/colochation-registry/infra-as-code:colochation -f Dockerfile . 
 docker run --name iac-colochation -p 8080:8080 --network="iac" --rm -d nighttheo/infra-as-code:colochation
+
+docker build -t colochation-registry/infra-as-code:colochation -f Dockerfile . --push rg.fr-par.scw.cloud/colochation-registry/infra-as-code:colochation
+
+docker build -t colochation-registry/infra-as-code:colochation -f  Dockerfile .
+docker login rg.fr-par.scw.cloud/colochation-registry -u nologin -p $SCW_SECRET_KEY
+docker push rg.fr-par.scw.cloud/colochation-registry/infra-as-code:colochation
+```
+
+
+```shell
+# MYSQL
+docker run --name iac-mysql -e MYSQL_ROOT_PASSWORD=pwd -d mysql:8.2.0 --rm -d
 ```

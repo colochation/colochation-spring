@@ -6,6 +6,8 @@ import cat.omnes.colochation.colochationback.domain.GuestsRepository;
 import cat.omnes.colochation.colochationback.infrastructure.inmemory.InMemoryChoresRepository;
 import cat.omnes.colochation.colochationback.infrastructure.inmemory.InMemoryGroceryRepository;
 import cat.omnes.colochation.colochationback.infrastructure.inmemory.InMemoryGuestsRepository;
+import cat.omnes.colochation.colochationback.infrastructure.mysql.MySQL;
+import cat.omnes.colochation.colochationback.infrastructure.mysql.MySQLChoresRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import redis.clients.jedis.JedisPooled;
@@ -13,8 +15,8 @@ import redis.clients.jedis.JedisPooled;
 @Configuration
 public class ColochationConfig {
     @Bean
-    ChoresRepository choresRepository(JedisPooled redis) {
-        return new InMemoryChoresRepository();
+    ChoresRepository choresRepository(MySQL mysql) {
+        return new MySQLChoresRepository(mysql);
     }
 
     @Bean
