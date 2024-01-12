@@ -12,7 +12,7 @@ variable "network_id" {
   type        = string
 }
 
-# K8S
+#  K8S
 resource "scaleway_k8s_cluster" "this" {
   name    = "cluster"
   version = "1.24.3"
