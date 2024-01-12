@@ -1,0 +1,59 @@
+name: Terraform
+
+on:
+  push:
+    branches: [ main , terraform ]
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    env:
+      working-directory: terraform
+      SCW_ACCESS_KEY: ${{ secrets.SCW_ACCESS_KEY }}
+      SCW_SECRET_KEY: ${{ secrets.SCW_SECRET_KEY }}
+      SCW_DEFAULT_ORGANIZATION_ID: ${{ secrets.SCW_DEFAULT_ORGANIZATION_ID }}
+      SCW_DEFAULT_PROJECT_ID: ${{ secrets.SCW_DEFAULT_PROJECT_ID }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.SCW_ACCESS_KEY }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.SCW_SECRET_KEY }}
+    steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-region: eu-west-1
+
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 0.14.4
+
+      - name: Terraform Fmt
+        id: fmt
+        run: terraform fmt -check
+        continue-on-error: true
+
+      - name: Terraform init
+        id: init
+        run: terraform init
+        working-directory: ${{ env.working-directory }}
+
+      - name: Terraform validate
+        id: validate
+        run: terraform validate
+
+      - name: Terraform plan
+        id: plan
+        run: terraform plan -no-color
+        working-directory: ${{ env.working-directory }}
+
+      - name: Terraform apply
+        id: apply
+        run: terraform apply -auto-approve -input=false
+        working-directory: ${{ env.working-directory }}
+
+      - name: Install InSpec
+        uses: actionshub/chef-install@main
+        with:
+          channel: current
+          project: inspec
