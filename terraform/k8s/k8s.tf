@@ -213,6 +213,6 @@ resource "kubernetes_horizontal_pod_autoscaler" "main" {
       name = "colochation"
     }
 
-    target_cpu_utilization_percentage = 5 #% CPU
+    target_cpu_utilization_percentage = 1 #% CPU
   }
 }
