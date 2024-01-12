@@ -1,0 +1,6 @@
+.terraform
+**.terraform*
+*tfstate*
+bucket_name
+bucket_endpoint
+.env
