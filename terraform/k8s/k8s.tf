@@ -35,7 +35,6 @@ resource "scaleway_k8s_pool" "this" {
   region     = scaleway_k8s_cluster.this.region
 }
 
-# voir si on peu s'en passer
 resource "null_resource" "kubeconfig" {
   depends_on = [scaleway_k8s_pool.this]
   triggers = {
@@ -197,6 +196,6 @@ resource "kubernetes_service" "mysql" {
       target_port = 3306
     }
 
-    type = "LoadBalancer"
+    type = "ClusterIP"
   }
 }
