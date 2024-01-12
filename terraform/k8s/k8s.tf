@@ -199,3 +199,20 @@ resource "kubernetes_service" "mysql" {
     type = "ClusterIP"
   }
 }
+
+resource "kubernetes_horizontal_pod_autoscaler" "main" {
+  metadata {
+    name = "cpu-autoscaler"
+  }
+
+  spec {
+    max_replicas = 2
+
+    scale_target_ref {
+      kind = "Deployment"
+      name = "colochation"
+    }
+
+    target_cpu_utilization_percentage = 5 #% CPU
+  }
+}
