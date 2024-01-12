@@ -61,7 +61,7 @@ docker run --name iac-colochation -p 8080:8080 --network="iac" --rm -d nighttheo
 docker build -t colochation-registry/infra-as-code:colochation -f Dockerfile . --push rg.fr-par.scw.cloud/colochation-registry/infra-as-code:colochation
 
 docker build -t colochation-registry/infra-as-code:colochation -f  Dockerfile .
-docker login rg.fr-par.scw.cloud/colochation-registry -u nologin -p $SCW_SECRET_KEY
+docker login rg.fr-par.scw.cloud/colochation-registry -u nologin --password-stdin <<< "$SCW_SECRET_KEY"
 docker push rg.fr-par.scw.cloud/colochation-registry/infra-as-code:colochation
 ```
 

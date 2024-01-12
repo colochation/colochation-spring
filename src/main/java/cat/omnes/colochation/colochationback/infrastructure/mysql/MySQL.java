@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class MySQL {
-    private static final String URL = "jdbc:mysql://mysql:3306/colochation";
+    private static final String URL = "jdbc:mysql://mysql:3306/colochation?useSSL=false&allowPublicKeyRetrieval=true";
     private static final String USER = "root";
     private static final String PASSWORD = "pwd";
 
@@ -26,6 +26,12 @@ public class MySQL {
     }
 
     public Connection getConnection() {
-        return connection;
+        try {
+            return DriverManager.getConnection(URL, USER, PASSWORD);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

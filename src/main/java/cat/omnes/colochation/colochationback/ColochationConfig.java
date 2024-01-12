@@ -14,6 +14,13 @@ import redis.clients.jedis.JedisPooled;
 
 @Configuration
 public class ColochationConfig {
+
+    @Bean
+    MySQL mySQL() {
+        return new MySQL(
+                // "jdbc:mysql://localhost:3306/colochation",
+        );
+    }
     @Bean
     ChoresRepository choresRepository(MySQL mysql) {
         return new MySQLChoresRepository(mysql);
