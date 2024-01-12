@@ -12,6 +12,12 @@ variable "network_id" {
   type        = string
 }
 
+variable "DATABASE_PWD" {
+    type        = string
+    description = "Le mot de passe de la base de données"
+}
+
+
 #  K8S
 resource "scaleway_k8s_cluster" "this" {
   name    = "cluster"
@@ -151,7 +157,7 @@ resource "kubernetes_deployment" "database" {
 
           env {
             name  = "MYSQL_ROOT_PASSWORD"
-            value = "pwd"
+            value = var.DATABASE_PWD
           }
 
           env {

@@ -15,6 +15,7 @@ jobs:
       SCW_DEFAULT_PROJECT_ID: ${{ secrets.SCW_DEFAULT_PROJECT_ID }}
       AWS_ACCESS_KEY_ID: ${{ secrets.SCW_ACCESS_KEY }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.SCW_SECRET_KEY }}
+      TF_VAR_DATABASE_PWD: ${{ secrets.DATABASE_PWD }}
     steps:
       - name: Check out code
         uses: actions/checkout@v2
