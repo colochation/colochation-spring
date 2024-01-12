@@ -31,7 +31,7 @@ jobs:
       - name: Terraform init
         id: init
         run: terraform init
-        working-directory: ${{ env.working-directory }}
+        working-directory: ./terraform/infra-as-code
 
       - name: Terraform validate
         id: validate
@@ -40,12 +40,12 @@ jobs:
       - name: Terraform plan
         id: plan
         run: terraform plan -no-color
-        working-directory: ${{ env.working-directory }}
+        working-directory: ./terraform/infra-as-code
 
       - name: Terraform apply
         id: apply
         run: terraform apply -auto-approve -input=false
-        working-directory: ${{ env.working-directory }}
+        working-directory: ./terraform/infra-as-code
 
       - name: Install InSpec
         uses: actionshub/chef-install@main
