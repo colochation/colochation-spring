@@ -7,14 +7,15 @@ terraform {
   }
 }
 
+variable "db_pwd" {
+description = "Le mot de passe de la base de données"
+    type        = string
+    sensitive   = true
+}
+
 variable "network_id" {
   description = "L'ID du réseau VPC privé à utiliser pour le cluster"
   type        = string
-}
-
-variable "DATABASE_PWD" {
-    type        = string
-    description = "Le mot de passe de la base de données"
 }
 
 
@@ -157,7 +158,7 @@ resource "kubernetes_deployment" "database" {
 
           env {
             name  = "MYSQL_ROOT_PASSWORD"
-            value = var.DATABASE_PWD
+            value = var.db_pwd
           }
 
           env {

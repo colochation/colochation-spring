@@ -15,6 +15,12 @@ terraform {
   }
 }
 
+variable "database_password" {
+description = "Le mot de passe de la base de données"
+    type        = string
+    sensitive   = true
+}
+
 module "network" {
   source = "./network"
 }
@@ -22,4 +28,5 @@ module "network" {
 module "k8s" {
     source     = "./k8s"
     network_id = module.network.network_id
+    db_pwd     = var.database_password
 }
